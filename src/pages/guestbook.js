@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-// import Layout from "../components/layout"
-// import SEO from "../components/seo"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { graphql } from "gatsby"
 
 // 0 dependency axios clone with fauna endpoint baked in
@@ -23,8 +23,21 @@ export default function Guestbook(props) {
     setStatus([true, "loading..."])
     return xios
       .get()
-      .then(x => console.log(x) || setMessages(x.reverse()))
-      .then(() => setStatus(null))
+      .then(x => {
+        console.log(x)
+        if (x.name === "BadRequest") {
+          setStatus([false, "BadRequest detected: Fauna DB instance is likely still setting up"])
+        } else if (Array.isArray(x)) {
+          setMessages(x.reverse())
+          setStatus(null)
+        } else {
+          setStatus([false, JSON.stringify(null, 2, x)])
+        }
+      })
+      .catch(err => {
+        console.log("err", err)
+        setStatus(JSON.stringify(null, 2, err))
+      })
   }
   const deleteMsg = ref => () => {
     setStatus([true, "deleting..."])
@@ -38,31 +51,31 @@ export default function Guestbook(props) {
   }
   React.useEffect(() => void refresh(), [])
   return (
-    // <Layout location={props.location} title={siteTitle}>
-    <div style={{ transition: "all 0.5s" }}>
-      {/* <SEO title="Guestbook" /> */}
-      <h1>Guestbook</h1>
-      <p>leave a message after the tone!</p>
-      {!messages.length ? (
-        <Pre> Guestbook is empty! Say something! </Pre>
-      ) : (
-        <div>
-          {messages.map(({ data: { name, message }, ref }, i) => {
-            return <Comment key={i} {...{ name, message, handler: deleteMsg(ref) }} />
-          })}
-        </div>
-      )}
-      {status &&
-        (status[0] /** loading or error state */ ? (
-          <Spinner />
+    <Layout location={props.location} title={siteTitle}>
+      <div style={{ transition: "all 0.5s" }}>
+        <SEO title="Guestbook" />
+        <h1>Guestbook</h1>
+        <p>leave a message after the tone!</p>
+        {!messages.length ? (
+          <Pre> Guestbook is empty! Say something! </Pre>
         ) : (
           <div>
-            <Pre>{status[1]}</Pre>
+            {messages.map(({ data: { name, message }, ref }, i) => {
+              return <Comment key={i} {...{ name, message, handler: deleteMsg(ref) }} />
+            })}
           </div>
-        ))}
-      <CommentForm {...{ refresh, setStatus }} />
-    </div>
-    // </Layout>
+        )}
+        {status &&
+          (status[0] /** loading or error state */ ? (
+            <Spinner />
+          ) : (
+            <div>
+              <Pre>{status[1]}</Pre>
+            </div>
+          ))}
+        <CommentForm {...{ refresh, setStatus }} />
+      </div>
+    </Layout>
   )
 }
 

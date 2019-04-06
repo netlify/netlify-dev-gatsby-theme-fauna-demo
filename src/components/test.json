@@ -1,0 +1,59 @@
+{
+  "name": "BadRequest",
+  "message": "instance not found",
+  "requestResult": {
+    "client": {
+      "_baseUrl": "https://db.fauna.com:443",
+      "_timeout": 60000,
+      "_secret": "fnADLU58CIAGAGJ4-BWBkNI9BzPcabPv7FJpOLH4",
+      "_observer": null,
+      "_lastSeen": 1554579575370763
+    },
+    "method": "POST",
+    "path": "",
+    "query": null,
+    "requestContent": { "paginate": { "match": { "@ref": "indexes/all_items" }, "terms": [] } },
+    "responseRaw": "{\"errors\":[{\"position\":[\"paginate\",\"index\"],\"code\":\"instance not found\",\"description\":\"Index 'all_items' is not active.\"}]}",
+    "responseContent": {
+      "errors": [
+        {
+          "position": ["paginate", "index"],
+          "code": "instance not found",
+          "description": "Index 'all_items' is not active."
+        }
+      ]
+    },
+    "statusCode": 400,
+    "responseHeaders": {
+      "content-type": "application/json;charset=utf-8",
+      "date": "Sat, 06 Apr 2019 19:39:35 GMT",
+      "x-bus-bytes-in": "0",
+      "x-bus-bytes-out": "0",
+      "x-bus-messages-in": "0",
+      "x-bus-messages-out": "0",
+      "x-faunadb-build": "2.6.3.rc1-cdecfe6",
+      "x-faunadb-host": "ec2-54-162-90-173.compute-1.amazonaws.com",
+      "x-points-network-out": "0.0",
+      "x-points-storage-read": "0.0",
+      "x-points-storage-write": "0.0",
+      "x-points-total": "0.0",
+      "x-query-bytes-in": "62",
+      "x-query-bytes-out": "123",
+      "x-query-time": "8",
+      "x-read-ops": "0",
+      "x-storage-bytes-read": "0",
+      "x-storage-bytes-write": "0",
+      "x-storage-ops-delete": "0",
+      "x-storage-ops-read": "0",
+      "x-storage-ops-write": "0",
+      "x-txn-delay": "0",
+      "x-txn-retries": "0",
+      "x-txn-time": "1554579575370763",
+      "x-write-ops": "0",
+      "content-length": "123",
+      "connection": "Close"
+    },
+    "startTime": 1554579575249,
+    "endTime": 1554579575497
+  }
+}
