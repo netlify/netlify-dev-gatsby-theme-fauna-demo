@@ -2,12 +2,12 @@
 [build]
   command = "yarn run build"
   functions = "functions"
-  publish = "dist"
+  publish = "public"
 
 [dev] # https://github.com/netlify/netlify-dev-plugin#project-detection
   command = "yarn start" # Command to start your dev server
   port = 3000 # Port that the dev server will be listening on
-  publish = "dist" # Folder with the static content for _redirect file
+  publish = "public" # Folder with the static content for _redirect file
 
 ## Uncomment to use this redirect for Single Page Applications. 
 ## Not needed for static site generators.
