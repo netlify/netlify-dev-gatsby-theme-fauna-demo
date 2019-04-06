@@ -1,5 +1,7 @@
 # Netlify Dev Gatsby Theme Fauna DB demo
 
+[Github](https://github.com/netlify/netlify-dev-gatsby-theme-fauna-demo) | [Deployed on Netlify](https://netlify-dev-gatsby-theme-fauna-demo.netlify.com/)
+
 This demo uses:
 
 - a [Gatsby Theme](https://github.com/greglobinski/gatsby-themes/blob/master/packages/gatsby-theme-elevator-pitch/README.md)
